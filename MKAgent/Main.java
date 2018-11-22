@@ -4,6 +4,10 @@ import java.io.EOFException;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.Reader;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.PrintStream;
+import java.util.concurrent.ThreadLocalRandom;
 
 /**
  * The main application class. It also provides methods for communication
@@ -55,5 +59,14 @@ public class Main
 	public static void main(String[] args)
 	{
 		// TODO: implement
+		//try {
+			new Agent(7,7).start();
+	//	}
+		/*catch (IOException e) {
+      		System.err.println("Communication error: " + e.getMessage());
+    	}
+    	catch (InvalidMessageException e) {
+      		System.err.println("THIS IS A REAL BUG: " + e.getMessage());
+    	}*/
 	}
 }
