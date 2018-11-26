@@ -40,7 +40,7 @@ public class Agent
 
 	//Params: the depth of the search, the current board, whose turn it is
 	//TO DO: For alpha-beta pruning, add alpha and beta arguments of type int
-	private int minimax(int height, Board board, boolean maximizingPlayer)
+	private int minimax(int height, Board board, boolean maximizingPlayer, int alpha, int beta)
 	{
 		//Search to the given depth or leaf node reached
 		if (height == 0 || kalah.gameOver(board)) {
@@ -70,10 +70,16 @@ public class Agent
 					int maxEval = Integer.MIN_VALUE;
 
 					//Add aplha and beta as parameters
-					int eval = minimax(height-1, board, false);
+					int eval = minimax(height-1, board, false, alpha, beta);
 					maxEval = Math.max(maxEval, eval);
 					//Alpha-beta here
-				
+				  alpha = Math.max(alpha, maxEval);
+					System.err.println("Max player Alpha: " + alpha + ", beta: " + beta);
+					if(beta <= alpha) {
+						System.err.println("pruning");
+						break;
+					}
+
 					return maxEval;
 				}
 
@@ -84,12 +90,19 @@ public class Agent
 					Kalah.makeMove(board, move);
 					System.err.println("Board after min move: " + board);
 					int minEval = Integer.MAX_VALUE;
-					
+
 					//Add aplha and beta as parameters
-					int eval = minimax(height-1, board, true);
+					int eval = minimax(height-1, board, true, alpha, beta);
 					minEval = Math.min(minEval, eval);
 					//Alpha-beta here
-					
+					beta = Math.min(beta, minEval);
+					System.err.println("Min plaAlpha: " + alpha + ", beta: " + beta);
+					if(beta <= alpha) {
+						System.err.println("pruning");
+						break;
+					}
+
+
 					return minEval;
 				}
 			}
@@ -100,7 +113,7 @@ public class Agent
 	}
 
 	//TO DO: MODIFY THE METHOD SO THAT IT WOULD CHOOSE THE BEST NEW MOVE FIRST
-	//BY CALLING EVALUATION FUNCTION ON ALL POSSIBLE MOVES FIRST AND THEN 
+	//BY CALLING EVALUATION FUNCTION ON ALL POSSIBLE MOVES FIRST AND THEN
 	//SORT THEM AND CALL THE MINIMAX IN THE SORTED ORDER
 	//Finds the next best move to make
 	private int nextMove()
@@ -117,7 +130,7 @@ public class Agent
 
 				Board board = new Board(kalah.getBoard());
 				Kalah.makeMove(board, move);
-				int heuristics = minimax(5, board,false);
+				int heuristics = minimax(3, board,false, Integer.MIN_VALUE, Integer.MAX_VALUE);
 
 				//Check if this move is better than previous best one
 				if (heuristics > bestHeuristics) {
@@ -152,7 +165,7 @@ public class Agent
 				Kalah.makeMove(board, move);
 				System.err.printf("Board after agent move %d: ",i);
 				System.err.println(board);
-				int heuristics = minimax(5, board,false);
+				int heuristics = minimax(5, board,false, Integer.MIN_VALUE, Integer.MAX_VALUE);
 
 				//Check if this move is better than previous best one
 				if (heuristics > noSwapEvaluation) {
@@ -174,7 +187,7 @@ public class Agent
 				Kalah.makeMove(board, move);
 				System.err.printf("Board after not agent move %d: ",i);
 				System.err.println(board);
-				int heuristics = minimax(5, board, true);
+				int heuristics = minimax(5, board, true, Integer.MIN_VALUE, Integer.MAX_VALUE);
 
 				//Check if this move is better than previous best one
 				if (heuristics > swapEvaluation) {
@@ -187,7 +200,7 @@ public class Agent
 		if(swapEvaluation > noSwapEvaluation)
 			return -1;
 		else
-			return bestMove;		
+			return bestMove;
 
 
 	}
@@ -219,7 +232,7 @@ public class Agent
 					MsgType mt = Protocol.getMessageType(msg);
 					switch(mt) {
 
-						case START: 
+						case START:
 						System.err.println("A start");
 						//Check which side the agent is playing
 						boolean first = Protocol.interpretStartMsg(msg);
@@ -228,7 +241,7 @@ public class Agent
 							side = Side.SOUTH;
 							int move = nextMove();
 							Main.sendMsg(Protocol.createMoveMsg(move));
-						} 
+						}
 						else {
 							side = Side.NORTH;
 							maySwap = true;
@@ -271,11 +284,11 @@ public class Agent
 								move = nextMove();
 							maySwap = false;
 
-							if (msg == null) 
+							if (msg == null)
 								msg = Protocol.createMoveMsg(move);
 							Main.sendMsg(msg);
 						}
-						
+
 						System.err.print("The board:\n" + kalah.getBoard());
 						break;
 
