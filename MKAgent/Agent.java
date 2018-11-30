@@ -38,78 +38,101 @@ public class Agent
 		return ourSeeds - oppSeeds;
 	}
 
-	//Params: the depth of the search, the current board, whose turn it is
+	//Params: the depth of the search, the current board, whose turn it is, alpha, beta
+	//Return: int array containing max/minEval, alpha, beta
 	//TO DO: For alpha-beta pruning, add alpha and beta arguments of type int
-	private int minimax(int height, Board board, boolean maximizingPlayer, int alpha, int beta)
-	{
+	private int[] minimax(int height, Board board, boolean maximizingPlayer, int alpha, int beta) {
 		//Search to the given depth or leaf node reached
 		if (height == 0 || kalah.gameOver(board)) {
 			int v = evaluate(board);
 			System.err.println("Evaluated value: " + v);
-			return v;
+			return new int[] {v, alpha, beta};
 		}
-		//Go through all the moves and check if they're valid
-		for(int i = 1; i <= holes; i++) {
 
-			Side currentSide;
-			if(maximizingPlayer)
-				currentSide = side;
-			else
-				currentSide = side.opposite();
+		if (maximizingPlayer) {
 
-			Move move = new Move(currentSide,i);
+			int maxEval = Integer.MIN_VALUE;
+			for(int i = 1; i <= holes; i++) {
 
-			if (kalah.isLegalMove(board, move)) {
+				Move move = new Move(side,i);
 
-				if (maximizingPlayer) {
-
+				if (kalah.isLegalMove(board, move)) {
 					//Board b = new Board(kalah.getBoard());
 					System.err.println("Board before max move: " + board);
-					Kalah.makeMove(board, move);
+					//Clone the current state of the board
+					Board lastBoard = board;
+					try  {
+						lastBoard = board.clone();	
+					}
+					catch(CloneNotSupportedException e){
+						System.err.println(e.getMessage());
+						 }
+
+					Side nextTurn = Kalah.makeMove(board, move);
+					if(nextTurn == side)
+						maximizingPlayer = true;
+					else
+						maximizingPlayer = false;
 					System.err.println("Board after max move: " + board);
-					int maxEval = Integer.MIN_VALUE;
+					System.err.println("Is it our turn now? " + maximizingPlayer);
 
-					//Add aplha and beta as parameters
-					int eval = minimax(height-1, board, false, alpha, beta);
+					int eval = minimax(height-1, board, maximizingPlayer, alpha, beta)[0];
+					//Undo the last move
+					board = lastBoard;
+
 					maxEval = Math.max(maxEval, eval);
-					//Alpha-beta here
-				  alpha = Math.max(alpha, maxEval);
-					System.err.println("Max player Alpha: " + alpha + ", beta: " + beta);
-					if(beta <= alpha) {
-						System.err.println("pruning");
+					alpha = Math.max(alpha, eval);
+					System.err.println("alpha: " + alpha);
+					if (beta <= alpha) {
+						System.err.println("Pruning, alpha: " + alpha + ", beta: " + beta);
 						break;
 					}
-
-					return maxEval;
-				}
-
-				else {
-
-					//Board b = new Board(kalah.getBoard());
-					System.err.println("Board before min move: " + board);
-					Kalah.makeMove(board, move);
-					System.err.println("Board after min move: " + board);
-					int minEval = Integer.MAX_VALUE;
-
-					//Add aplha and beta as parameters
-					int eval = minimax(height-1, board, true, alpha, beta);
-					minEval = Math.min(minEval, eval);
-					//Alpha-beta here
-					beta = Math.min(beta, minEval);
-					System.err.println("Min plaAlpha: " + alpha + ", beta: " + beta);
-					if(beta <= alpha) {
-						System.err.println("pruning");
-						break;
-					}
-
-
-					return minEval;
+					
 				}
 			}
-
+			return new int[] {maxEval, alpha, beta};
 		}
+		
+		else {
+			int minEval = Integer.MAX_VALUE;
 
-		return Integer.MIN_VALUE;
+			for(int i = 1; i <= holes; i++) {
+
+				Move move = new Move(side.opposite(),i);
+
+				if (kalah.isLegalMove(board, move)) {
+					System.err.println("Board before min move: " + board);
+					//Clone the current state of the board
+					Board lastBoard = board;
+					try  {
+						lastBoard = board.clone();	
+					}
+					catch(CloneNotSupportedException e){
+						System.err.println(e.getMessage());
+						 }
+					Side nextTurn = Kalah.makeMove(board, move);
+					if(nextTurn == side)
+						maximizingPlayer = true;
+					else
+						maximizingPlayer = false;
+					System.err.println("Board after min move: " + board);
+					System.err.println("Is it our turn now? " + maximizingPlayer);
+					
+					int eval = minimax(height-1, board, maximizingPlayer, alpha, beta)[0];
+					//Undo the last move
+					board = lastBoard;
+					minEval = Math.min(minEval, eval);
+
+					beta = Math.min(beta, eval);
+					System.err.println("beta: " + beta);
+					if (beta <= alpha) {
+						System.err.println("Pruning, alpha: " + alpha + ", beta: " + beta);
+						break;
+					}
+				}
+			}
+			return new int[] {minEval, alpha, beta};
+		}
 	}
 
 	//TO DO: MODIFY THE METHOD SO THAT IT WOULD CHOOSE THE BEST NEW MOVE FIRST
@@ -120,6 +143,9 @@ public class Agent
 	{
 		int bestMove = 0;
 		int bestHeuristics = Integer.MIN_VALUE;
+		int alpha = Integer.MIN_VALUE;
+		int beta = Integer.MAX_VALUE;
+		boolean ourTurn = false;
 
 		//Go through all the possible moves
 		for (int i = 1; i <= holes; i++) {
@@ -129,8 +155,20 @@ public class Agent
 			if (kalah.isLegalMove(move)) {
 
 				Board board = new Board(kalah.getBoard());
-				Kalah.makeMove(board, move);
-				int heuristics = minimax(3, board,false, Integer.MIN_VALUE, Integer.MAX_VALUE);
+				Side nextTurn = Kalah.makeMove(board, move);
+				//Check whose turn it is next
+				if(nextTurn == side)
+					ourTurn = true;
+				else
+					ourTurn = false;
+				System.err.printf("Board after agent move %d: ",i);
+				System.err.println(board);
+				System.err.println("Is it our turn now? " + ourTurn);
+				
+				int[] results = minimax(3, board,ourTurn, alpha, beta);
+				int heuristics = results[0];
+				alpha = results[1];
+				alpha = Math.max(alpha, heuristics);
 
 				//Check if this move is better than previous best one
 				if (heuristics > bestHeuristics) {
@@ -139,9 +177,7 @@ public class Agent
 				}
 			}
 		}
-
 		return bestMove;
-
 	}
 
 	//Checks whether to perform a swap or a normal move
@@ -152,21 +188,34 @@ public class Agent
 		int bestMove = 0;
 		int swapEvaluation = Integer.MIN_VALUE;
 		int noSwapEvaluation = Integer.MIN_VALUE;
+		int alpha = Integer.MIN_VALUE;
+		int beta = Integer.MAX_VALUE;
+		boolean ourTurn = false;
 
 		//Calculate evaluation for no swap
 		//Go through all the possible moves
-		System.err.println("Checking evaluation for no swapping");
+		System.err.println("Checking evaluation for no swapping " + kalah.getBoard());
 		for (int i = 1; i <= holes; i++) {
 
 			Move move = new Move(side,i);
 
 			if (kalah.isLegalMove(move)) {
 				Board board = new Board(kalah.getBoard());
-				Kalah.makeMove(board, move);
+				Side nextTurn = Kalah.makeMove(board, move);
+				System.err.println("nextTurn:" + nextTurn+ " side: "+side);
+				//Check whose turn it is next
+				if(nextTurn == side)
+					ourTurn = true;
+				else
+					ourTurn = false;
 				System.err.printf("Board after agent move %d: ",i);
 				System.err.println(board);
-				int heuristics = minimax(5, board,false, Integer.MIN_VALUE, Integer.MAX_VALUE);
-
+				System.err.println("Is it our turn now? " + ourTurn);
+				int[] results = minimax(3, board,ourTurn, alpha, beta);
+				int heuristics = results[0];
+				alpha = results[1];
+				alpha = Math.max(alpha, heuristics);
+			
 				//Check if this move is better than previous best one
 				if (heuristics > noSwapEvaluation) {
 					bestMove = i;
@@ -175,7 +224,9 @@ public class Agent
 			}
 		}
 		swap();
-		System.err.println("Checking evaluation for swapping");
+		alpha = Integer.MIN_VALUE;
+		beta = Integer.MAX_VALUE;
+		System.err.println("Checking evaluation for swapping " + kalah.getBoard());
 		//Calculate evaluation for swap
 		//Go through all the possible moves
 		for (int i = 1; i <= holes; i++) {
@@ -184,11 +235,19 @@ public class Agent
 
 			if (kalah.isLegalMove(move)) {
 				Board board = new Board(kalah.getBoard());
-				Kalah.makeMove(board, move);
+				Side nextTurn = Kalah.makeMove(board, move);
+				//Check whose turn it is next
+				if(nextTurn == side)
+					ourTurn = true;
+				else
+					ourTurn = false;
 				System.err.printf("Board after not agent move %d: ",i);
 				System.err.println(board);
-				int heuristics = minimax(5, board, true, Integer.MIN_VALUE, Integer.MAX_VALUE);
-
+				System.err.println("Is it our turn now? " + ourTurn);
+				int[] results = minimax(3, board, ourTurn, alpha, beta);
+				int heuristics = results[0];
+				beta = results[2];
+				beta = Math.min(beta, heuristics);
 				//Check if this move is better than previous best one
 				if (heuristics > swapEvaluation) {
 					swapEvaluation = heuristics;
@@ -200,10 +259,9 @@ public class Agent
 		if(swapEvaluation > noSwapEvaluation)
 			return -1;
 		else
-			return bestMove;
-
-
+			return bestMove;		
 	}
+
 	//Swap sides if either player chooses to play swap
 	private void swap()
 	{
