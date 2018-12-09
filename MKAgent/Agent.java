@@ -1,4 +1,5 @@
 package MKAgent;
+import java.util.HashMap;
 import java.io.BufferedReader;
 import java.io.EOFException;
 import java.io.IOException;
@@ -7,7 +8,6 @@ import java.io.Reader;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.PrintStream;
-
 
 public class Agent
 {
@@ -19,7 +19,7 @@ public class Agent
 
 	int moveCount = 0;
 
-	boolean first;	
+	boolean first;
 
 	boolean maySwap;
 
@@ -27,10 +27,39 @@ public class Agent
 
 	boolean timeElapsed = false;
 
+	HashMap<Integer, TTableEntry> tTable;
+
+	//An entry for the transposition table
+	private class TTableEntry
+	{
+		//The array returned by minimax
+		private int[] minimaxResult;
+
+		private int depth;
+
+		public TTableEntry(int[] newMinimaxResult, int newDepth) {
+			this.minimaxResult = newMinimaxResult;
+			this.depth = newDepth;
+		}
+
+		public int[] getMinimaxResult() {
+			return this.minimaxResult;
+		}
+
+		public int getDepth() {
+			return this.depth;
+		}
+
+		public String toString() {
+			return "[Value: " + minimaxResult[0] + ", Alpha: " + minimaxResult[1] + ", Beta: " + minimaxResult[2] + "], Depth: " + depth;
+		}
+	}
+
 	public Agent(int holes, int seeds)
 	{
 		this.holes = holes;
 		kalah = new Kalah(new Board(holes, seeds));
+		tTable = new HashMap<Integer, TTableEntry>();
 	}
 
 	//EXAMPLE OF EVALUATION FUNCTION, COPIED FROM THE REFAGENT
@@ -73,7 +102,7 @@ public class Agent
 					//Clone the current state of the board
 					Board lastBoard = board;
 					try  {
-						lastBoard = board.clone();	
+						lastBoard = board.clone();
 					}
 					catch(CloneNotSupportedException e){
 						System.err.println(e.getMessage());
@@ -84,10 +113,33 @@ public class Agent
 						maximizingPlayer = true;
 					else
 						maximizingPlayer = false;
-				//	System.err.println("Board after max move: " + board);
-				//	System.err.println("Is it our turn now? " + maximizingPlayer);
+					//System.err.println("Board after max move: " + board);
+					//System.err.println("Is it our turn now? " + maximizingPlayer);
 
-					int eval = minimax(height-1, board, maximizingPlayer, alpha, beta)[0];
+					int[] tempEval = new int[3];
+
+					if(tTable.containsKey(board.hashCode())) {
+						TTableEntry entry = tTable.get(board.hashCode());
+
+						if(height < entry.getDepth())
+							tempEval = entry.getMinimaxResult();
+						else
+							tempEval = minimax(height-1, board, maximizingPlayer, alpha, beta);
+					}
+					else
+						tempEval = minimax(height-1, board, maximizingPlayer, alpha, beta);
+
+					if(!tTable.containsKey(board.hashCode())) {
+						tTable.put(board.hashCode(), new TTableEntry(tempEval, height));
+					}
+					else {
+						TTableEntry entry = tTable.get(board.hashCode());
+
+						if(height < entry.getDepth())
+							tTable.put(board.hashCode(), new TTableEntry(tempEval, height));
+					}
+
+					int eval = tempEval[0];
 					//Undo the last move
 					board = lastBoard;
 
@@ -98,7 +150,7 @@ public class Agent
 				//		System.err.println("Pruning, alpha: " + alpha + ", beta: " + beta);
 						break;
 					}
-					
+
 				}
 				if((System.currentTimeMillis() - startTime > 5000) || (maySwap && System.currentTimeMillis() - startTime > 2500)){
 						timeElapsed = true;
@@ -107,7 +159,7 @@ public class Agent
 			}
 			return new int[] {maxEval, alpha, beta};
 		}
-		
+
 		else {
 			int minEval = Integer.MAX_VALUE;
 
@@ -120,7 +172,7 @@ public class Agent
 					//Clone the current state of the board
 					Board lastBoard = board;
 					try  {
-						lastBoard = board.clone();	
+						lastBoard = board.clone();
 					}
 					catch(CloneNotSupportedException e){
 						System.err.println(e.getMessage());
@@ -130,10 +182,35 @@ public class Agent
 						maximizingPlayer = true;
 					else
 						maximizingPlayer = false;
-				//	System.err.println("Board after min move: " + board);
-				//	System.err.println("Is it our turn now? " + maximizingPlayer);
-					
-					int eval = minimax(height-1, board, maximizingPlayer, alpha, beta)[0];
+					//System.err.println("Board after min move: " + board);
+					//System.err.println("Is it our turn now? " + maximizingPlayer);
+
+
+					int[] tempEval = new int[4];
+
+					if(tTable.containsKey(board.hashCode())) {
+						TTableEntry entry = tTable.get(board.hashCode());
+
+						if(height < entry.getDepth())
+							tempEval = entry.getMinimaxResult();
+						else
+							tempEval = minimax(height-1, board, maximizingPlayer, alpha, beta);
+					}
+					else
+						tempEval = minimax(height-1, board, maximizingPlayer, alpha, beta);
+
+					if(!tTable.containsKey(board.hashCode())) {
+						tTable.put(board.hashCode(), new TTableEntry(tempEval, height));
+					}
+					else {
+						TTableEntry entry = tTable.get(board.hashCode());
+
+						if(height < entry.getDepth())
+							tTable.put(board.hashCode(), new TTableEntry(tempEval, height));
+					}
+
+					int eval = tempEval[0];
+
 					//Undo the last move
 					board = lastBoard;
 					minEval = Math.min(minEval, eval);
@@ -161,6 +238,7 @@ public class Agent
 		int alpha = Integer.MIN_VALUE;
 		int beta = Integer.MAX_VALUE;
 		boolean ourTurn = false;
+		int[] temp = new int[3];
 		//int depth = 0;
 		timeElapsed = false;
 		startTime = System.currentTimeMillis();
@@ -188,10 +266,36 @@ public class Agent
 						//System.err.printf("Board after agent move %d: ",i);
 						//System.err.println(board);
 						//System.err.println("Is it our turn now? " + ourTurn);
-						
-						int[] results = minimax(depth, board,ourTurn, alpha, beta);
-						int heuristics = results[0];
-						alpha = results[1];
+
+
+						if(tTable.containsKey(board.hashCode())) {
+							TTableEntry entry = tTable.get(board.hashCode());
+							System.err.println("This board state was in the table");
+							if(depth < entry.getDepth()) {
+								temp = entry.getMinimaxResult();
+								System.err.println("Table entry depth is better than current depth");
+							}
+							else {
+								System.err.println("Table entry depth is worse than current depth");
+								temp = minimax(depth, board, ourTurn, alpha, beta);
+							}
+						}
+						if(!tTable.containsKey(board.hashCode())) {
+							tTable.put(board.hashCode(), new TTableEntry(temp, depth));
+							System.err.println("Adding board state to ttable");
+						}
+						else {
+							TTableEntry entry = tTable.get(board.hashCode());
+
+							if(depth < entry.getDepth())
+								tTable.put(board.hashCode(), new TTableEntry(temp, depth));
+						}
+
+						System.err.println(tTable.get(board.hashCode()));
+
+						//int[] results = minimax(depth, board,ourTurn, alpha, beta);
+						int heuristics = temp[0];
+						alpha = temp[1];
 						alpha = Math.max(alpha, heuristics);
 
 						//Check if this move is better than previous best one
@@ -242,7 +346,7 @@ public class Agent
 				//System.err.printf("Board after agent move %d: ",i);
 				System.err.println(board);
 				//System.err.println("Is it our turn now? " + ourTurn);
-				
+
 				int[] results = minimax(3, board,ourTurn, alpha, beta);
 				int heuristics = results[0];
 				alpha = results[1];
@@ -299,7 +403,7 @@ public class Agent
 						int heuristics = results[0];
 						alpha = results[1];
 						alpha = Math.max(alpha, heuristics);
-					
+
 						//Check if this move is better than previous best one
 						if (heuristics > noSwapEvaluation) {
 							bestMove = i;
@@ -314,7 +418,7 @@ public class Agent
 				}
 				if(timeElapsed)
 					break;
-			}			
+			}
 		}
 		swap();
 		alpha = Integer.MIN_VALUE;
@@ -359,14 +463,14 @@ public class Agent
 				}
 				if(timeElapsed)
 					break;
-			}		
+			}
 		}
 		swap();
 		System.err.printf("Swap evaluation: %d, noSwapEvaluation: %d\n", swapEvaluation, noSwapEvaluation);
 		if(swapEvaluation > noSwapEvaluation)
 			return -1;
 		else
-			return bestMove;		
+			return bestMove;
 	}
 
 	//Swap sides if either player chooses to play swap
@@ -446,7 +550,7 @@ public class Agent
 									move = swapMove;
 							}
 							else
-							{	
+							{
 								moveCount++;
 								move = IDDFS();
 							}
