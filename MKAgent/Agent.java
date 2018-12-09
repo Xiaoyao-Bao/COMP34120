@@ -8,6 +8,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.PrintStream;
 
+
 public class Agent
 {
 	Side side;
@@ -15,6 +16,16 @@ public class Agent
 	Kalah kalah;
 
 	int holes;
+
+	int moveCount = 0;
+
+	boolean first;	
+
+	boolean maySwap;
+
+	long startTime;
+
+	boolean timeElapsed = false;
 
 	public Agent(int holes, int seeds)
 	{
@@ -45,7 +56,7 @@ public class Agent
 		//Search to the given depth or leaf node reached
 		if (height == 0 || kalah.gameOver(board)) {
 			int v = evaluate(board);
-			System.err.println("Evaluated value: " + v);
+		//	System.err.println("Evaluated value: " + v);
 			return new int[] {v, alpha, beta};
 		}
 
@@ -58,7 +69,7 @@ public class Agent
 
 				if (kalah.isLegalMove(board, move)) {
 					//Board b = new Board(kalah.getBoard());
-					System.err.println("Board before max move: " + board);
+				//	System.err.println("Board before max move: " + board);
 					//Clone the current state of the board
 					Board lastBoard = board;
 					try  {
@@ -73,8 +84,8 @@ public class Agent
 						maximizingPlayer = true;
 					else
 						maximizingPlayer = false;
-					System.err.println("Board after max move: " + board);
-					System.err.println("Is it our turn now? " + maximizingPlayer);
+				//	System.err.println("Board after max move: " + board);
+				//	System.err.println("Is it our turn now? " + maximizingPlayer);
 
 					int eval = minimax(height-1, board, maximizingPlayer, alpha, beta)[0];
 					//Undo the last move
@@ -82,13 +93,17 @@ public class Agent
 
 					maxEval = Math.max(maxEval, eval);
 					alpha = Math.max(alpha, eval);
-					System.err.println("alpha: " + alpha);
+				//	System.err.println("alpha: " + alpha);
 					if (beta <= alpha) {
-						System.err.println("Pruning, alpha: " + alpha + ", beta: " + beta);
+				//		System.err.println("Pruning, alpha: " + alpha + ", beta: " + beta);
 						break;
 					}
 					
 				}
+				if((System.currentTimeMillis() - startTime > 5000) || (maySwap && System.currentTimeMillis() - startTime > 2500)){
+						timeElapsed = true;
+						break;
+					}
 			}
 			return new int[] {maxEval, alpha, beta};
 		}
@@ -101,7 +116,7 @@ public class Agent
 				Move move = new Move(side.opposite(),i);
 
 				if (kalah.isLegalMove(board, move)) {
-					System.err.println("Board before min move: " + board);
+				//	System.err.println("Board before min move: " + board);
 					//Clone the current state of the board
 					Board lastBoard = board;
 					try  {
@@ -115,8 +130,8 @@ public class Agent
 						maximizingPlayer = true;
 					else
 						maximizingPlayer = false;
-					System.err.println("Board after min move: " + board);
-					System.err.println("Is it our turn now? " + maximizingPlayer);
+				//	System.err.println("Board after min move: " + board);
+				//	System.err.println("Is it our turn now? " + maximizingPlayer);
 					
 					int eval = minimax(height-1, board, maximizingPlayer, alpha, beta)[0];
 					//Undo the last move
@@ -124,15 +139,78 @@ public class Agent
 					minEval = Math.min(minEval, eval);
 
 					beta = Math.min(beta, eval);
-					System.err.println("beta: " + beta);
+				//	System.err.println("beta: " + beta);
 					if (beta <= alpha) {
-						System.err.println("Pruning, alpha: " + alpha + ", beta: " + beta);
+				//		System.err.println("Pruning, alpha: " + alpha + ", beta: " + beta);
 						break;
 					}
 				}
+				if((System.currentTimeMillis() - startTime > 5000) || (maySwap && System.currentTimeMillis() - startTime > 2500)){
+						timeElapsed = true;
+						break;
+					}
 			}
 			return new int[] {minEval, alpha, beta};
 		}
+	}
+
+	private int IDDFS()
+	{
+		int bestMove = 0;
+		int bestHeuristics = Integer.MIN_VALUE;
+		int alpha = Integer.MIN_VALUE;
+		int beta = Integer.MAX_VALUE;
+		boolean ourTurn = false;
+		//int depth = 0;
+		timeElapsed = false;
+		startTime = System.currentTimeMillis();
+		while(!timeElapsed){
+			for(int depth=0; ; depth++)
+			{
+				//Go through all the possible moves
+				for (int i = 1; i <= holes; i++) {
+
+					Move move = new Move(side,i);
+
+					if (kalah.isLegalMove(move)) {
+
+						Board board = new Board(kalah.getBoard());
+						Side nextTurn = Kalah.makeMove(board, move);
+						//Check whose turn it is next
+						if(nextTurn == side)
+							ourTurn = true;
+						else
+							ourTurn = false;
+						if(first && moveCount ==1) {
+							//System.err.println("First move so we wont get new turn");
+							ourTurn = false;
+						}
+						//System.err.printf("Board after agent move %d: ",i);
+						//System.err.println(board);
+						//System.err.println("Is it our turn now? " + ourTurn);
+						
+						int[] results = minimax(depth, board,ourTurn, alpha, beta);
+						int heuristics = results[0];
+						alpha = results[1];
+						alpha = Math.max(alpha, heuristics);
+
+						//Check if this move is better than previous best one
+						if (heuristics > bestHeuristics) {
+							bestMove = i;
+							bestHeuristics = heuristics;
+						}
+					}
+					if(System.currentTimeMillis() - startTime > 5000){
+						System.err.println("Five seconds elapse, depth reached: " + depth);
+						timeElapsed = true;
+						break;
+					}
+				}
+				if(timeElapsed)
+					break;
+			}
+		}
+		return bestMove;
 	}
 
 	//TO DO: MODIFY THE METHOD SO THAT IT WOULD CHOOSE THE BEST NEW MOVE FIRST
@@ -161,9 +239,9 @@ public class Agent
 					ourTurn = true;
 				else
 					ourTurn = false;
-				System.err.printf("Board after agent move %d: ",i);
+				//System.err.printf("Board after agent move %d: ",i);
 				System.err.println(board);
-				System.err.println("Is it our turn now? " + ourTurn);
+				//System.err.println("Is it our turn now? " + ourTurn);
 				
 				int[] results = minimax(3, board,ourTurn, alpha, beta);
 				int heuristics = results[0];
@@ -191,68 +269,97 @@ public class Agent
 		int alpha = Integer.MIN_VALUE;
 		int beta = Integer.MAX_VALUE;
 		boolean ourTurn = false;
+		timeElapsed = false;
+		startTime = System.currentTimeMillis();
 
 		//Calculate evaluation for no swap
 		//Go through all the possible moves
 		System.err.println("Checking evaluation for no swapping " + kalah.getBoard());
-		for (int i = 1; i <= holes; i++) {
+		while(!timeElapsed)
+		{
+			for(int depth = 0; ; depth++)
+			{
+				for (int i = 1; i <= holes; i++) {
 
-			Move move = new Move(side,i);
+					Move move = new Move(side,i);
 
-			if (kalah.isLegalMove(move)) {
-				Board board = new Board(kalah.getBoard());
-				Side nextTurn = Kalah.makeMove(board, move);
-				System.err.println("nextTurn:" + nextTurn+ " side: "+side);
-				//Check whose turn it is next
-				if(nextTurn == side)
-					ourTurn = true;
-				else
-					ourTurn = false;
-				System.err.printf("Board after agent move %d: ",i);
-				System.err.println(board);
-				System.err.println("Is it our turn now? " + ourTurn);
-				int[] results = minimax(3, board,ourTurn, alpha, beta);
-				int heuristics = results[0];
-				alpha = results[1];
-				alpha = Math.max(alpha, heuristics);
-			
-				//Check if this move is better than previous best one
-				if (heuristics > noSwapEvaluation) {
-					bestMove = i;
-					noSwapEvaluation = heuristics;
+					if (kalah.isLegalMove(move)) {
+						Board board = new Board(kalah.getBoard());
+						Side nextTurn = Kalah.makeMove(board, move);
+					//	System.err.println("nextTurn:" + nextTurn+ " side: "+side);
+						//Check whose turn it is next
+						if(nextTurn == side)
+							ourTurn = true;
+						else
+							ourTurn = false;
+					//	System.err.printf("Board after agent move %d: ",i);
+					//	System.err.println(board);
+					//	System.err.println("Is it our turn now? " + ourTurn);
+						int[] results = minimax(3, board,ourTurn, alpha, beta);
+						int heuristics = results[0];
+						alpha = results[1];
+						alpha = Math.max(alpha, heuristics);
+					
+						//Check if this move is better than previous best one
+						if (heuristics > noSwapEvaluation) {
+							bestMove = i;
+							noSwapEvaluation = heuristics;
+						}
+					}
+					if(System.currentTimeMillis() - startTime > 2500){
+						System.err.println("2.5 seconds elapsed, depth reached: " + depth);
+						timeElapsed = true;
+						break;
+					}
 				}
-			}
+				if(timeElapsed)
+					break;
+			}			
 		}
 		swap();
 		alpha = Integer.MIN_VALUE;
 		beta = Integer.MAX_VALUE;
+		timeElapsed = false;
+		startTime = System.currentTimeMillis();
 		System.err.println("Checking evaluation for swapping " + kalah.getBoard());
-		//Calculate evaluation for swap
-		//Go through all the possible moves
-		for (int i = 1; i <= holes; i++) {
+		while(!timeElapsed) {
+			for(int depth = 0; ; depth++)
+			{
+				//Calculate evaluation for swap
+				//Go through all the possible moves
+				for (int i = 1; i <= holes; i++) {
 
-			Move move = new Move(side.opposite(),i);
+					Move move = new Move(side.opposite(),i);
 
-			if (kalah.isLegalMove(move)) {
-				Board board = new Board(kalah.getBoard());
-				Side nextTurn = Kalah.makeMove(board, move);
-				//Check whose turn it is next
-				if(nextTurn == side)
-					ourTurn = true;
-				else
-					ourTurn = false;
-				System.err.printf("Board after not agent move %d: ",i);
-				System.err.println(board);
-				System.err.println("Is it our turn now? " + ourTurn);
-				int[] results = minimax(3, board, ourTurn, alpha, beta);
-				int heuristics = results[0];
-				beta = results[2];
-				beta = Math.min(beta, heuristics);
-				//Check if this move is better than previous best one
-				if (heuristics > swapEvaluation) {
-					swapEvaluation = heuristics;
+					if (kalah.isLegalMove(move)) {
+						Board board = new Board(kalah.getBoard());
+						Side nextTurn = Kalah.makeMove(board, move);
+						//Check whose turn it is next
+						if(nextTurn == side)
+							ourTurn = true;
+						else
+							ourTurn = false;
+						//System.err.printf("Board after not agent move %d: ",i);
+						//System.err.println(board);
+						//System.err.println("Is it our turn now? " + ourTurn);
+						int[] results = minimax(3, board, ourTurn, alpha, beta);
+						int heuristics = results[0];
+						beta = results[2];
+						beta = Math.min(beta, heuristics);
+						//Check if this move is better than previous best one
+						if (heuristics > swapEvaluation) {
+							swapEvaluation = heuristics;
+						}
+					}
+					if(System.currentTimeMillis() - startTime > 2500){
+						System.err.println("2.5 seconds elapsed, depth reached: " + depth);
+						timeElapsed = true;
+						break;
+					}
 				}
-			}
+				if(timeElapsed)
+					break;
+			}		
 		}
 		swap();
 		System.err.printf("Swap evaluation: %d, noSwapEvaluation: %d\n", swapEvaluation, noSwapEvaluation);
@@ -280,7 +387,7 @@ public class Agent
 			String msg;
 
 			//If the agent isn't the starting player it can swap sides
-			boolean maySwap = false;
+			maySwap = false;
 
 			//Make a move
 			while(true) {
@@ -293,11 +400,12 @@ public class Agent
 						case START:
 						System.err.println("A start");
 						//Check which side the agent is playing
-						boolean first = Protocol.interpretStartMsg(msg);
+						first = Protocol.interpretStartMsg(msg);
 						//Make the first move, now just plays hole 1
 						if (first) {
 							side = Side.SOUTH;
-							int move = nextMove();
+							moveCount++;
+							int move = IDDFS();
 							Main.sendMsg(Protocol.createMoveMsg(move));
 						}
 						else {
@@ -325,7 +433,7 @@ public class Agent
 
 							//Check whether to swap or not
 							if (maySwap) {
-
+								moveCount++;
 								int swapMove = toSwap();
 
 								if (swapMove == -1) {
@@ -337,9 +445,11 @@ public class Agent
 								else
 									move = swapMove;
 							}
-
 							else
-								move = nextMove();
+							{	
+								moveCount++;
+								move = IDDFS();
+							}
 							maySwap = false;
 
 							if (msg == null)
