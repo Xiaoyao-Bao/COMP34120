@@ -1,4 +1,5 @@
 package MKAgent;
+import java.util.Arrays;
 import java.util.Observable;
 
 /**
@@ -37,6 +38,16 @@ public class Board extends Observable implements Cloneable
 	 */
 	private int[][] board;
 
+		@Override
+		public int hashCode() {
+			int[] arr = new int[holes * 2];
+			for(int i = 0; i <= 1; i++)
+				for(int j = 0; j < holes; j++)
+					arr[i] = board[i][j];
+
+			return Arrays.hashCode(arr);
+		}
+
     /**
      * @param side A side of the board.
      * @return The index of side "side" for the first dimension of "board".
@@ -54,7 +65,7 @@ public class Board extends Observable implements Cloneable
 
     /**
      * Creates a new board.
-     * 
+     *
      * @param holes The number of holes per side (must be >= 1).
      * @param seeds The initial number of seeds per hole (must be >= 0). The
      *        stores are empty initially.
@@ -77,7 +88,7 @@ public class Board extends Observable implements Cloneable
     		board[SOUTH_ROW][i] = seeds;
     	}
     }
-    
+
 	/**
      * Creates a new board as the copy of a given one. Both copies can then be
      * altered independently.
@@ -100,7 +111,7 @@ public class Board extends Observable implements Cloneable
     /**
      * Creates a copy of the current board. Both copies can then be altered
      * independently.
-     *  
+     *
      * @see java.lang.Object#clone()
      * @see #Board(Board)
      */
@@ -186,7 +197,7 @@ public class Board extends Observable implements Cloneable
 
     	return board[1-indexOfSide(side)][holes+1-hole];
     }
- 
+
     /**
      * Sets the number of seeds in a hole opposite to a given one.
      * @param side The side the given hole is located on.
@@ -283,4 +294,3 @@ public class Board extends Observable implements Cloneable
 		return boardString.toString();
 	}
 }
-

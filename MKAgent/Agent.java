@@ -1,13 +1,16 @@
 package MKAgent;
-import java.util.HashMap;
 import java.io.BufferedReader;
 import java.io.EOFException;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.Reader;
 import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.FileOutputStream;
 import java.io.PrintStream;
+import java.util.*;
+import java.lang.Math.*;
 
 public class Agent
 {
@@ -27,65 +30,72 @@ public class Agent
 
 	boolean timeElapsed = false;
 
-	HashMap<Integer, TTableEntry> tTable;
-
-	//An entry for the transposition table
-	private class TTableEntry
-	{
-		//The array returned by minimax
-		private int[] minimaxResult;
-
-		private int depth;
-
-		public TTableEntry(int[] newMinimaxResult, int newDepth) {
-			this.minimaxResult = newMinimaxResult;
-			this.depth = newDepth;
-		}
-
-		public int[] getMinimaxResult() {
-			return this.minimaxResult;
-		}
-
-		public int getDepth() {
-			return this.depth;
-		}
-
-		public String toString() {
-			return "[Value: " + minimaxResult[0] + ", Alpha: " + minimaxResult[1] + ", Beta: " + minimaxResult[2] + "], Depth: " + depth;
-		}
-	}
-
 	public Agent(int holes, int seeds)
 	{
 		this.holes = holes;
 		kalah = new Kalah(new Board(holes, seeds));
-		tTable = new HashMap<Integer, TTableEntry>();
 	}
 
 	//EXAMPLE OF EVALUATION FUNCTION, COPIED FROM THE REFAGENT
 	//TO DO: CREATE OUR OWN EVALUATION FUNCTION USING THE HEURISTICS
-	private int evaluate(Board b)
+	private int evaluate(Board b) throws java.io.IOException
 	{
-		int ourSeeds = b.getSeedsInStore(side);
-		int oppSeeds = b.getSeedsInStore(side.opposite());
+		try {
+		File file = new File("ind.txt");
+		Scanner sc = new Scanner(file);
+		String line = sc.nextLine().replaceAll("\\[|\\]", "");
+		String[] split = line.split(", ");
+		Float[] weights = new Float[4];
+		for (int i = 0; i<4; i++)
+			 weights[i] = Float.valueOf(split[i]);
 
-		for (int i = 1; i <= holes; i++)
-		{
-			ourSeeds += b.getSeeds(side, i);
-			oppSeeds += b.getSeeds(side.opposite(), i);
-		}
+		return (Math.round(weights[0]*heuristic1(b))
+ 						- Math.round(weights[1]*heuristic2(b))
+ 						- Math.round(weights[2]*heuristic3(b))
+ 						+ Math.round(weights[3]*heuristic4(b)));
+		//readFile.close();
+	} catch (IOException e) {
+		e.printStackTrace();
+	}
+		return heuristic1(b);
+	}
 
-		return ourSeeds - oppSeeds;
+	private int heuristic1(Board b)	{		// player seeds
+		return b.getSeedsInStore(side);
+	}
+
+	private int heuristic2(Board b)	{		// opponents seeds
+		return b.getSeedsInStore(side.opposite());
+	}
+
+	private int heuristic3(Board b) {		// playerWinDistance - to find how close player is to having half the seeds
+		return 49 - b.getSeedsInStore(side);
+	}
+
+	private int heuristic4(Board b){		// opponentWinDistance - to find how close opponent is to winning
+			return 49 - b.getSeedsInStore(side.opposite());
+	}
+	// mobility heuristic
+	private int mobility(Board b){
+		int mobilityFactor = 0;
+		for (int i = 1; i <= holes; i++) {if (b.getSeeds(side, i) > 0) mobilityFactor++;}
+		return mobilityFactor;
 	}
 
 	//Params: the depth of the search, the current board, whose turn it is, alpha, beta
 	//Return: int array containing max/minEval, alpha, beta
 	//TO DO: For alpha-beta pruning, add alpha and beta arguments of type int
-	private int[] minimax(int height, Board board, boolean maximizingPlayer, int alpha, int beta) {
+	private int[] minimax(int height, Board board, boolean maximizingPlayer, int alpha, int beta) throws java.io.IOException {
 		//Search to the given depth or leaf node reached
 		if (height == 0 || kalah.gameOver(board)) {
 			int v = evaluate(board);
 		//	System.err.println("Evaluated value: " + v);
+		if (kalah.gameOver(board)){
+			FileWriter fileWriter = new FileWriter("finalScore1.txt");
+			int finalSeeds = board.getSeedsInStore(side);
+			fileWriter.write( String.valueOf(finalSeeds));
+			fileWriter.close();
+		}
 			return new int[] {v, alpha, beta};
 		}
 
@@ -113,33 +123,10 @@ public class Agent
 						maximizingPlayer = true;
 					else
 						maximizingPlayer = false;
-					//System.err.println("Board after max move: " + board);
-					//System.err.println("Is it our turn now? " + maximizingPlayer);
+				//	System.err.println("Board after max move: " + board);
+				//	System.err.println("Is it our turn now? " + maximizingPlayer);
 
-					int[] tempEval = new int[3];
-
-					if(tTable.containsKey(board.hashCode())) {
-						TTableEntry entry = tTable.get(board.hashCode());
-
-						if(height < entry.getDepth())
-							tempEval = entry.getMinimaxResult();
-						else
-							tempEval = minimax(height-1, board, maximizingPlayer, alpha, beta);
-					}
-					else
-						tempEval = minimax(height-1, board, maximizingPlayer, alpha, beta);
-
-					if(!tTable.containsKey(board.hashCode())) {
-						tTable.put(board.hashCode(), new TTableEntry(tempEval, height));
-					}
-					else {
-						TTableEntry entry = tTable.get(board.hashCode());
-
-						if(height < entry.getDepth())
-							tTable.put(board.hashCode(), new TTableEntry(tempEval, height));
-					}
-
-					int eval = tempEval[0];
+					int eval = minimax(height-1, board, maximizingPlayer, alpha, beta)[0];
 					//Undo the last move
 					board = lastBoard;
 
@@ -152,7 +139,7 @@ public class Agent
 					}
 
 				}
-				if((System.currentTimeMillis() - startTime > 5000) || (maySwap && System.currentTimeMillis() - startTime > 2500)){
+				if((System.currentTimeMillis() - startTime > 200) || (maySwap && System.currentTimeMillis() - startTime > 100)){
 						timeElapsed = true;
 						break;
 					}
@@ -182,35 +169,10 @@ public class Agent
 						maximizingPlayer = true;
 					else
 						maximizingPlayer = false;
-					//System.err.println("Board after min move: " + board);
-					//System.err.println("Is it our turn now? " + maximizingPlayer);
+				//	System.err.println("Board after min move: " + board);
+				//	System.err.println("Is it our turn now? " + maximizingPlayer);
 
-
-					int[] tempEval = new int[4];
-
-					if(tTable.containsKey(board.hashCode())) {
-						TTableEntry entry = tTable.get(board.hashCode());
-
-						if(height < entry.getDepth())
-							tempEval = entry.getMinimaxResult();
-						else
-							tempEval = minimax(height-1, board, maximizingPlayer, alpha, beta);
-					}
-					else
-						tempEval = minimax(height-1, board, maximizingPlayer, alpha, beta);
-
-					if(!tTable.containsKey(board.hashCode())) {
-						tTable.put(board.hashCode(), new TTableEntry(tempEval, height));
-					}
-					else {
-						TTableEntry entry = tTable.get(board.hashCode());
-
-						if(height < entry.getDepth())
-							tTable.put(board.hashCode(), new TTableEntry(tempEval, height));
-					}
-
-					int eval = tempEval[0];
-
+					int eval = minimax(height-1, board, maximizingPlayer, alpha, beta)[0];
 					//Undo the last move
 					board = lastBoard;
 					minEval = Math.min(minEval, eval);
@@ -222,7 +184,7 @@ public class Agent
 						break;
 					}
 				}
-				if((System.currentTimeMillis() - startTime > 5000) || (maySwap && System.currentTimeMillis() - startTime > 2500)){
+				if((System.currentTimeMillis() - startTime > 200) || (maySwap && System.currentTimeMillis() - startTime > 100)){
 						timeElapsed = true;
 						break;
 					}
@@ -231,14 +193,13 @@ public class Agent
 		}
 	}
 
-	private int IDDFS()
+	private int IDDFS() throws java.io.IOException
 	{
 		int bestMove = 0;
 		int bestHeuristics = Integer.MIN_VALUE;
 		int alpha = Integer.MIN_VALUE;
 		int beta = Integer.MAX_VALUE;
 		boolean ourTurn = false;
-		int[] temp = new int[3];
 		//int depth = 0;
 		timeElapsed = false;
 		startTime = System.currentTimeMillis();
@@ -267,35 +228,9 @@ public class Agent
 						//System.err.println(board);
 						//System.err.println("Is it our turn now? " + ourTurn);
 
-
-						if(tTable.containsKey(board.hashCode())) {
-							TTableEntry entry = tTable.get(board.hashCode());
-							System.err.println("This board state was in the table");
-							if(depth < entry.getDepth()) {
-								temp = entry.getMinimaxResult();
-								System.err.println("Table entry depth is better than current depth");
-							}
-							else {
-								System.err.println("Table entry depth is worse than current depth");
-								temp = minimax(depth, board, ourTurn, alpha, beta);
-							}
-						}
-						if(!tTable.containsKey(board.hashCode())) {
-							tTable.put(board.hashCode(), new TTableEntry(temp, depth));
-							System.err.println("Adding board state to ttable");
-						}
-						else {
-							TTableEntry entry = tTable.get(board.hashCode());
-
-							if(depth < entry.getDepth())
-								tTable.put(board.hashCode(), new TTableEntry(temp, depth));
-						}
-
-						System.err.println(tTable.get(board.hashCode()));
-
-						//int[] results = minimax(depth, board,ourTurn, alpha, beta);
-						int heuristics = temp[0];
-						alpha = temp[1];
+						int[] results = minimax(depth, board,ourTurn, alpha, beta);
+						int heuristics = results[0];
+						alpha = results[1];
 						alpha = Math.max(alpha, heuristics);
 
 						//Check if this move is better than previous best one
@@ -304,7 +239,7 @@ public class Agent
 							bestHeuristics = heuristics;
 						}
 					}
-					if(System.currentTimeMillis() - startTime > 5000){
+					if(System.currentTimeMillis() - startTime > 500){
 						System.err.println("Five seconds elapse, depth reached: " + depth);
 						timeElapsed = true;
 						break;
@@ -321,7 +256,7 @@ public class Agent
 	//BY CALLING EVALUATION FUNCTION ON ALL POSSIBLE MOVES FIRST AND THEN
 	//SORT THEM AND CALL THE MINIMAX IN THE SORTED ORDER
 	//Finds the next best move to make
-	private int nextMove()
+	private int nextMove() throws java.io.IOException
 	{
 		int bestMove = 0;
 		int bestHeuristics = Integer.MIN_VALUE;
@@ -364,7 +299,7 @@ public class Agent
 
 	//Checks whether to perform a swap or a normal move
 	//Returns -1 if swap, else number of the best move
-	private int toSwap()
+	private int toSwap() throws java.io.IOException
 	{
 		System.err.println("Checking whether to swap");
 		int bestMove = 0;
