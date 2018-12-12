@@ -1,0 +1,425 @@
+Agent started
+Depth to search: 5
+A start
+Starting player? true
+A state
+This was the move: 1
+Is the game over? false
+Is it our turn again? false
+The board:
+0  --  7  7  7  7  7  7  7
+0  8  8  8  8  8  8  --  1
+A state
+This was the move: 1
+Is the game over? false
+Is it our turn again? false
+The board:
+1  --  8  8  8  8  8  8  0
+0  8  8  8  8  8  8  --  1
+A state
+This was the move: 2
+Is the game over? false
+Is it our turn again? true
+The board:
+2  --  9  9  9  9  9  0  0
+1  9  8  8  8  8  8  --  1
+A state
+This was the move: 5
+Is the game over? false
+Is it our turn again? false
+The board:
+2  --  9  9  10  10  10  1  1
+1  9  8  8  0  9  9  --  2
+A state
+This was the move: 1
+Is the game over? false
+Is it our turn again? true
+The board:
+2  --  9  9  10  10  10  2  0
+1  9  8  8  0  9  9  --  2
+A state
+This was the move: 6
+Is the game over? false
+Is it our turn again? false
+The board:
+2  --  10  10  11  11  11  3  1
+1  9  8  8  0  0  10  --  3
+A state
+This was the move: 1
+Is the game over? false
+Is it our turn again? true
+The board:
+2  --  10  10  11  11  11  4  0
+1  9  8  8  0  0  10  --  3
+A state
+This was the move: 2
+Is the game over? false
+Is it our turn again? false
+The board:
+2  --  10  10  11  11  12  5  1
+1  0  9  9  1  1  11  --  4
+A state
+This was the move: 1
+Is the game over? false
+Is it our turn again? true
+The board:
+2  --  10  10  11  11  12  6  0
+1  0  9  9  1  1  11  --  4
+A state
+This was the move: 3
+Is the game over? false
+Is it our turn again? false
+The board:
+2  --  10  10  11  12  13  7  1
+1  0  0  10  2  2  12  --  5
+A state
+This was the move: 1
+Is the game over? false
+Is it our turn again? true
+The board:
+2  --  10  10  11  12  13  8  0
+1  0  0  10  2  2  12  --  5
+A state
+This was the move: 6
+Is the game over? false
+Is it our turn again? true
+The board:
+2  --  10  10  11  12  13  8  0
+1  0  0  10  2  0  13  --  6
+A state
+This was the move: 4
+Is the game over? false
+Is it our turn again? false
+The board:
+2  --  10  11  12  13  14  9  1
+1  0  0  0  3  1  14  --  7
+A state
+This was the move: 1
+Is the game over? false
+Is it our turn again? true
+The board:
+2  --  10  11  12  13  14  10  0
+1  0  0  0  3  1  14  --  7
+A state
+This was the move: 1
+Is the game over? false
+Is it our turn again? false
+The board:
+2  --  10  0  12  13  14  10  0
+0  0  0  0  3  1  14  --  19
+A state
+This was the move: 2
+Is the game over? false
+Is it our turn again? true
+The board:
+3  --  11  1  13  14  15  0  0
+1  1  1  1  3  1  14  --  19
+A state
+This was the move: 5
+Is the game over? false
+Is it our turn again? true
+The board:
+3  --  11  1  13  14  15  0  0
+1  1  1  1  0  2  15  --  20
+A state
+This was the move: 3
+Is the game over? false
+Is it our turn again? false
+The board:
+3  --  11  1  13  14  15  0  0
+1  1  0  2  0  2  15  --  20
+A state
+This was the move: 6
+Is the game over? false
+Is it our turn again? true
+The board:
+3  --  12  0  13  14  15  0  0
+1  1  0  2  0  2  15  --  20
+A state
+This was the move: 2
+Is the game over? false
+Is it our turn again? false
+The board:
+3  --  12  0  0  14  15  0  0
+1  0  0  2  0  2  15  --  34
+A state
+This was the move: 3
+Is the game over? false
+Is it our turn again? true
+The board:
+6  --  13  1  1  15  0  1  1
+2  1  1  3  0  3  16  --  34
+A state
+This was the move: 7
+Is the game over? false
+Is it our turn again? true
+The board:
+6  --  14  2  2  16  1  2  2
+3  2  2  4  1  4  1  --  36
+A state
+This was the move: 7
+Is the game over? false
+Is it our turn again? true
+The board:
+6  --  14  2  2  16  1  2  2
+3  2  2  4  1  4  0  --  37
+A state
+This was the move: 4
+Is the game over? false
+Is it our turn again? true
+The board:
+6  --  14  2  2  16  1  2  2
+3  2  2  0  2  5  1  --  38
+A state
+This was the move: 1
+Is the game over? false
+Is it our turn again? false
+The board:
+6  --  14  2  2  0  1  2  2
+0  3  3  0  2  5  1  --  55
+A state
+This was the move: 1
+Is the game over? false
+Is it our turn again? true
+The board:
+6  --  14  2  2  0  2  3  0
+0  3  3  0  2  5  1  --  55
+A state
+This was the move: 7
+Is the game over? false
+Is it our turn again? true
+The board:
+6  --  14  2  2  0  2  3  0
+0  3  3  0  2  5  0  --  56
+A state
+This was the move: 2
+Is the game over? false
+Is it our turn again? false
+The board:
+6  --  14  2  2  0  2  3  0
+0  0  4  1  3  5  0  --  56
+A state
+This was the move: 2
+Is the game over? false
+Is it our turn again? true
+The board:
+6  --  14  2  3  1  3  0  0
+0  0  4  1  3  5  0  --  56
+A state
+This was the move: 5
+Is the game over? false
+Is it our turn again? true
+The board:
+6  --  14  2  3  1  3  0  0
+0  0  4  1  0  6  1  --  57
+A state
+This was the move: 7
+Is the game over? false
+Is it our turn again? true
+The board:
+6  --  14  2  3  1  3  0  0
+0  0  4  1  0  6  0  --  58
+A state
+This was the move: 6
+Is the game over? false
+Is it our turn again? false
+The board:
+6  --  14  2  3  2  4  1  1
+0  0  4  1  0  0  1  --  59
+A state
+This was the move: 1
+Is the game over? false
+Is it our turn again? true
+The board:
+6  --  14  2  3  2  4  2  0
+0  0  4  1  0  0  1  --  59
+A state
+This was the move: 7
+Is the game over? false
+Is it our turn again? true
+The board:
+6  --  14  2  3  2  4  2  0
+0  0  4  1  0  0  0  --  60
+A state
+This was the move: 4
+Is the game over? false
+Is it our turn again? false
+The board:
+6  --  14  2  3  2  0  2  0
+0  0  4  0  0  0  0  --  65
+A state
+This was the move: 2
+Is the game over? false
+Is it our turn again? true
+The board:
+6  --  14  2  3  3  1  0  0
+0  0  4  0  0  0  0  --  65
+A state
+This was the move: 3
+Is the game over? false
+Is it our turn again? false
+The board:
+6  --  14  2  3  3  1  0  0
+0  0  0  1  1  1  1  --  65
+A state
+This was the move: 3
+Is the game over? false
+Is it our turn again? true
+The board:
+6  --  14  2  3  4  0  0  0
+0  0  0  1  1  1  1  --  65
+A state
+This was the move: 7
+Is the game over? false
+Is it our turn again? true
+The board:
+6  --  14  2  3  4  0  0  0
+0  0  0  1  1  1  0  --  66
+A state
+This was the move: 4
+Is the game over? false
+Is it our turn again? false
+The board:
+6  --  14  2  3  4  0  0  0
+0  0  0  0  2  1  0  --  66
+A state
+This was the move: 4
+Is the game over? false
+Is it our turn again? false
+The board:
+7  --  15  3  4  0  0  0  0
+0  0  0  0  2  1  0  --  66
+A state
+This was the move: 5
+Is the game over? false
+Is it our turn again? true
+The board:
+8  --  16  4  0  0  0  0  0
+1  0  0  0  2  1  0  --  66
+A state
+This was the move: 1
+Is the game over? false
+Is it our turn again? false
+The board:
+8  --  16  0  0  0  0  0  0
+0  0  0  0  2  1  0  --  71
+A state
+This was the move: 7
+Is the game over? false
+Is it our turn again? false
+The board:
+10  --  1  1  1  1  1  1  1
+1  1  1  1  3  2  1  --  71
+A state
+This was the move: 1
+Is the game over? false
+Is it our turn again? true
+The board:
+10  --  1  1  1  1  1  2  0
+1  1  1  1  3  2  1  --  71
+A state
+This was the move: 7
+Is the game over? false
+Is it our turn again? true
+The board:
+10  --  1  1  1  1  1  2  0
+1  1  1  1  3  2  0  --  72
+A state
+This was the move: 6
+Is the game over? false
+Is it our turn again? true
+The board:
+10  --  1  1  1  1  1  2  0
+1  1  1  1  3  0  1  --  73
+A state
+This was the move: 7
+Is the game over? false
+Is it our turn again? true
+The board:
+10  --  1  1  1  1  1  2  0
+1  1  1  1  3  0  0  --  74
+A state
+This was the move: 5
+Is the game over? false
+Is it our turn again? true
+The board:
+10  --  1  1  1  1  1  2  0
+1  1  1  1  0  1  1  --  75
+A state
+This was the move: 7
+Is the game over? false
+Is it our turn again? true
+The board:
+10  --  1  1  1  1  1  2  0
+1  1  1  1  0  1  0  --  76
+A state
+This was the move: 2
+Is the game over? false
+Is it our turn again? false
+The board:
+10  --  1  1  1  1  1  2  0
+1  0  2  1  0  1  0  --  76
+A state
+This was the move: 2
+Is the game over? false
+Is it our turn again? true
+The board:
+10  --  1  1  1  2  2  0  0
+1  0  2  1  0  1  0  --  76
+A state
+This was the move: 1
+Is the game over? false
+Is it our turn again? false
+The board:
+10  --  1  0  1  2  2  0  0
+0  0  2  1  0  1  0  --  78
+A state
+This was the move: 3
+Is the game over? false
+Is it our turn again? true
+The board:
+10  --  1  0  2  3  0  0  0
+0  0  2  1  0  1  0  --  78
+A state
+This was the move: 6
+Is the game over? false
+Is it our turn again? false
+The board:
+10  --  1  0  2  3  0  0  0
+0  0  2  1  0  0  1  --  78
+A state
+This was the move: 4
+Is the game over? false
+Is it our turn again? true
+The board:
+10  --  2  1  3  0  0  0  0
+0  0  2  1  0  0  1  --  78
+A state
+This was the move: 3
+Is the game over? false
+Is it our turn again? false
+The board:
+10  --  2  1  3  0  0  0  0
+0  0  0  2  1  0  1  --  78
+A state
+This was the move: 5
+Is the game over? false
+Is it our turn again? false
+The board:
+11  --  3  2  0  0  0  0  0
+0  0  0  2  1  0  1  --  78
+A state
+This was the move: 6
+Is the game over? false
+Is it our turn again? false
+The board:
+12  --  4  0  0  0  0  0  0
+0  0  0  2  1  0  1  --  78
+A state
+This was the move: 7
+Is the game over? true
+Is it our turn again? false
+The board:
+13  --  0  0  0  0  0  0  0
+0  0  0  0  0  0  0  --  85
+An end

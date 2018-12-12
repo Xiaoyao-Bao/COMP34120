@@ -1,0 +1,909 @@
+Time to Search: 500
+A start
+Board in IDDFS: 0  --  7  7  7  7  7  7  7
+7  7  7  7  7  7  7  --  0
+
+T3 time elapsed, depth reached: 9
+T4 time elapsed, depth reached: 9
+T1 time elapsed, depth reached: 8
+T6 time elapsed, depth reached: 9
+T5 time elapsed, depth reached: 8
+T7 time elapsed, depth reached: 8
+T2 time elapsed, depth reached: 8
+Thread name: T1
+Best heuristics: 10
+Thread name: T2
+Best heuristics: 14
+Thread name: T3
+Best heuristics: 14
+Thread name: T4
+Best heuristics: 35
+Thread name: T5
+Best heuristics: 13
+Thread name: T6
+Best heuristics: 12
+Thread name: T7
+Best heuristics: 11
+Best move to play: 4
+Starting player? true
+A state
+This was the move: 4
+Is the game over? false
+Is it our turn again? false
+The board:
+0  --  7  7  7  7  8  8  8
+7  7  7  0  8  8  8  --  1
+A state
+This was the move: 1
+Is the game over? false
+Is it our turn again? true
+Board in IDDFS: 1  --  8  8  8  8  9  9  0
+8  7  7  0  8  8  8  --  1
+
+T1 time elapsed, depth reached: 9
+T5 time elapsed, depth reached: 9
+T3 time elapsed, depth reached: 10
+T2 time elapsed, depth reached: 9
+T6 time elapsed, depth reached: 9
+T7 time elapsed, depth reached: 9
+Thread name: T1
+Best heuristics: 22
+Thread name: T2
+Best heuristics: 15
+Thread name: T3
+Best heuristics: 49
+Thread name: T5
+Best heuristics: 21
+Thread name: T6
+Best heuristics: 15
+Thread name: T7
+Best heuristics: 16
+Best move to play: 3
+The board:
+1  --  8  8  8  8  9  9  0
+8  7  7  0  8  8  8  --  1
+A state
+This was the move: 3
+Is the game over? false
+Is it our turn again? false
+The board:
+1  --  8  8  8  8  9  10  1
+8  7  0  1  9  9  9  --  2
+A state
+This was the move: 1
+Is the game over? false
+Is it our turn again? true
+Board in IDDFS: 1  --  8  8  8  8  9  11  0
+8  7  0  1  9  9  9  --  2
+
+T2 time elapsed, depth reached: 8
+T4 time elapsed, depth reached: 9
+T1 time elapsed, depth reached: 8
+T5 time elapsed, depth reached: 8
+T6 time elapsed, depth reached: 8
+T7 time elapsed, depth reached: 9
+Thread name: T1
+Best heuristics: 17
+Thread name: T2
+Best heuristics: 18
+Thread name: T4
+Best heuristics: 20
+Thread name: T5
+Best heuristics: 17
+Thread name: T6
+Best heuristics: 19
+Thread name: T7
+Best heuristics: 52
+Best move to play: 7
+The board:
+1  --  8  8  8  8  9  11  0
+8  7  0  1  9  9  9  --  2
+A state
+This was the move: 7
+Is the game over? false
+Is it our turn again? false
+The board:
+1  --  9  9  9  9  10  12  1
+9  7  0  1  9  9  0  --  3
+A state
+This was the move: 1
+Is the game over? false
+Is it our turn again? true
+Board in IDDFS: 1  --  9  9  9  9  10  13  0
+9  7  0  1  9  9  0  --  3
+
+T4 time elapsed, depth reached: 10
+T2 time elapsed, depth reached: 10
+T5 time elapsed, depth reached: 10
+T1 time elapsed, depth reached: 9
+T6 time elapsed, depth reached: 9
+Thread name: T1
+Best heuristics: 19
+Thread name: T2
+Best heuristics: 60
+Thread name: T4
+Best heuristics: 27
+Thread name: T5
+Best heuristics: 21
+Thread name: T6
+Best heuristics: 19
+Best move to play: 2
+The board:
+1  --  9  9  9  9  10  13  0
+9  7  0  1  9  9  0  --  3
+A state
+This was the move: 2
+Is the game over? false
+Is it our turn again? false
+The board:
+1  --  9  9  9  9  10  13  1
+9  0  1  2  10  10  1  --  4
+A state
+This was the move: 1
+Is the game over? false
+Is it our turn again? true
+Board in IDDFS: 1  --  9  9  9  9  10  14  0
+9  0  1  2  10  10  1  --  4
+
+T3 time elapsed, depth reached: 10
+T4 time elapsed, depth reached: 10
+T1 time elapsed, depth reached: 10
+T5 time elapsed, depth reached: 11
+T6 time elapsed, depth reached: 10
+T7 time elapsed, depth reached: 10
+Thread name: T1
+Best heuristics: 31
+Thread name: T3
+Best heuristics: 23
+Thread name: T4
+Best heuristics: 18
+Thread name: T5
+Best heuristics: 52
+Thread name: T6
+Best heuristics: 52
+Thread name: T7
+Best heuristics: 36
+Best move to play: 5
+The board:
+1  --  9  9  9  9  10  14  0
+9  0  1  2  10  10  1  --  4
+A state
+This was the move: 5
+Is the game over? false
+Is it our turn again? false
+The board:
+1  --  10  10  10  10  11  15  1
+9  0  1  2  0  11  2  --  5
+A state
+This was the move: 2
+Is the game over? false
+Is it our turn again? true
+Board in IDDFS: 15  --  11  11  11  11  12  0  2
+10  1  2  3  1  0  3  --  5
+
+T2 time elapsed, depth reached: 9
+T1 time elapsed, depth reached: 9
+T3 time elapsed, depth reached: 9
+T5 time elapsed, depth reached: 10
+T4 time elapsed, depth reached: 10
+T7 time elapsed, depth reached: 9
+Thread name: T1
+Best heuristics: -7
+Thread name: T2
+Best heuristics: -17
+Thread name: T3
+Best heuristics: -26
+Thread name: T4
+Best heuristics: -20
+Thread name: T5
+Best heuristics: -14
+Thread name: T7
+Best heuristics: -10
+Best move to play: 1
+The board:
+15  --  11  11  11  11  12  0  2
+10  1  2  3  1  0  3  --  5
+A state
+This was the move: 1
+Is the game over? false
+Is it our turn again? false
+The board:
+15  --  11  11  11  11  13  1  3
+0  2  3  4  2  1  4  --  6
+A state
+This was the move: 1
+Is the game over? false
+Is it our turn again? true
+Board in IDDFS: 15  --  11  11  11  12  14  2  0
+0  2  3  4  2  1  4  --  6
+
+T3 time elapsed, depth reached: 9
+T6 time elapsed, depth reached: 10
+T2 time elapsed, depth reached: 9
+T4 time elapsed, depth reached: 11
+T5 time elapsed, depth reached: 10
+T7 time elapsed, depth reached: 9
+Thread name: T2
+Best heuristics: -19
+Thread name: T3
+Best heuristics: -42
+Thread name: T4
+Best heuristics: 23
+Thread name: T5
+Best heuristics: -41
+Thread name: T6
+Best heuristics: -10
+Thread name: T7
+Best heuristics: -18
+Best move to play: 4
+The board:
+15  --  11  11  11  12  14  2  0
+0  2  3  4  2  1  4  --  6
+A state
+This was the move: 4
+Is the game over? false
+Is it our turn again? true
+Board in IDDFS: 15  --  11  11  11  12  14  2  0
+0  2  3  0  3  2  5  --  7
+
+T5 game over reached, depth reached: 10
+T2 time elapsed, depth reached: 10
+T3 time elapsed, depth reached: 10
+T6 time elapsed, depth reached: 11
+T7 time elapsed, depth reached: 10
+Thread name: T2
+Best heuristics: 2
+Thread name: T3
+Best heuristics: -28
+Thread name: T5
+Best heuristics: 20
+Thread name: T6
+Best heuristics: 23
+Thread name: T7
+Best heuristics: -25
+Best move to play: 6
+The board:
+15  --  11  11  11  12  14  2  0
+0  2  3  0  3  2  5  --  7
+A state
+This was the move: 6
+Is the game over? false
+Is it our turn again? true
+Board in IDDFS: 15  --  11  11  11  12  14  2  0
+0  2  3  0  3  0  6  --  8
+
+T5 game over reached, depth reached: 10
+T2 game over reached, depth reached: 10
+T7 time elapsed, depth reached: 10
+T3 time elapsed, depth reached: 11
+Thread name: T2
+Best heuristics: 13
+Thread name: T3
+Best heuristics: -18
+Thread name: T5
+Best heuristics: 23
+Thread name: T7
+Best heuristics: -9
+Best move to play: 5
+The board:
+15  --  11  11  11  12  14  2  0
+0  2  3  0  3  0  6  --  8
+A state
+This was the move: 5
+Is the game over? false
+Is it our turn again? true
+Board in IDDFS: 15  --  11  11  11  12  14  2  0
+0  2  3  0  0  1  7  --  9
+
+T2 game over reached, depth reached: 9
+T6 game over reached, depth reached: 10
+T3 time elapsed, depth reached: 11
+T7 time elapsed, depth reached: 10
+Thread name: T2
+Best heuristics: 11
+Thread name: T3
+Best heuristics: -21
+Thread name: T6
+Best heuristics: -45
+Thread name: T7
+Best heuristics: -4
+Best move to play: 2
+The board:
+15  --  11  11  11  12  14  2  0
+0  2  3  0  0  1  7  --  9
+A state
+This was the move: 2
+Is the game over? false
+Is it our turn again? false
+The board:
+15  --  11  11  11  0  14  2  0
+0  0  4  0  0  1  7  --  22
+A state
+This was the move: 5
+Is the game over? false
+Is it our turn again? true
+Board in IDDFS: 25  --  12  12  0  0  14  2  0
+1  1  5  1  1  2  0  --  22
+
+T1 game over reached, depth reached: 7
+T5 game over reached, depth reached: 8
+T6 game over reached, depth reached: 8
+T3 game over reached, depth reached: 9
+T2 game over reached, depth reached: 9
+T4 game over reached, depth reached: 10
+Thread name: T1
+Best heuristics: -11
+Thread name: T2
+Best heuristics: -11
+Thread name: T3
+Best heuristics: 12
+Thread name: T4
+Best heuristics: -4
+Thread name: T5
+Best heuristics: -13
+Thread name: T6
+Best heuristics: 11
+Best move to play: 3
+The board:
+25  --  12  12  0  0  14  2  0
+1  1  5  1  1  2  0  --  22
+A state
+This was the move: 3
+Is the game over? false
+Is it our turn again? true
+Board in IDDFS: 25  --  12  12  0  0  14  2  0
+1  1  0  2  2  3  1  --  23
+
+T5 game over reached, depth reached: 8
+T6 game over reached, depth reached: 9
+T1 game over reached, depth reached: 9
+T2 game over reached, depth reached: 9
+T7 game over reached, depth reached: 9
+T4 game over reached, depth reached: 9
+Thread name: T1
+Best heuristics: -8
+Thread name: T2
+Best heuristics: 1
+Thread name: T4
+Best heuristics: -9
+Thread name: T5
+Best heuristics: -16
+Thread name: T6
+Best heuristics: -13
+Thread name: T7
+Best heuristics: 17
+Best move to play: 7
+The board:
+25  --  12  12  0  0  14  2  0
+1  1  0  2  2  3  1  --  23
+A state
+This was the move: 7
+Is the game over? false
+Is it our turn again? true
+Board in IDDFS: 25  --  12  12  0  0  14  2  0
+1  1  0  2  2  3  0  --  24
+
+T5 game over reached, depth reached: 8
+T2 game over reached, depth reached: 8
+T1 game over reached, depth reached: 9
+T6 game over reached, depth reached: 9
+T4 game over reached, depth reached: 9
+Thread name: T1
+Best heuristics: -12
+Thread name: T2
+Best heuristics: 17
+Thread name: T4
+Best heuristics: -4
+Thread name: T5
+Best heuristics: -13
+Thread name: T6
+Best heuristics: -5
+Best move to play: 2
+The board:
+25  --  12  12  0  0  14  2  0
+1  1  0  2  2  3  0  --  24
+A state
+This was the move: 2
+Is the game over? false
+Is it our turn again? false
+The board:
+25  --  12  12  0  0  14  2  0
+1  0  1  2  2  3  0  --  24
+A state
+This was the move: 2
+Is the game over? false
+Is it our turn again? true
+Board in IDDFS: 28  --  12  12  0  0  15  0  0
+1  0  1  0  2  3  0  --  24
+
+T1 game over reached, depth reached: 6
+T3 game over reached, depth reached: 8
+T5 game over reached, depth reached: 8
+T6 game over reached, depth reached: 9
+Thread name: T1
+Best heuristics: 19
+Thread name: T3
+Best heuristics: -17
+Thread name: T5
+Best heuristics: -16
+Thread name: T6
+Best heuristics: -18
+Best move to play: 1
+The board:
+28  --  12  12  0  0  15  0  0
+1  0  1  0  2  3  0  --  24
+A state
+This was the move: 1
+Is the game over? false
+Is it our turn again? false
+The board:
+28  --  12  0  0  0  15  0  0
+0  0  1  0  2  3  0  --  37
+A state
+This was the move: 3
+Is the game over? false
+Is it our turn again? true
+Board in IDDFS: 33  --  13  1  1  1  0  1  1
+1  1  2  1  0  4  1  --  37
+
+T2 game over reached, depth reached: 6
+T1 game over reached, depth reached: 6
+T6 game over reached, depth reached: 6
+T3 game over reached, depth reached: 7
+T7 game over reached, depth reached: 7
+T4 game over reached, depth reached: 8
+Thread name: T1
+Best heuristics: 14
+Thread name: T2
+Best heuristics: 14
+Thread name: T3
+Best heuristics: 14
+Thread name: T4
+Best heuristics: 12
+Thread name: T6
+Best heuristics: 16
+Thread name: T7
+Best heuristics: 19
+Best move to play: 7
+The board:
+33  --  13  1  1  1  0  1  1
+1  1  2  1  0  4  1  --  37
+A state
+This was the move: 7
+Is the game over? false
+Is it our turn again? true
+Board in IDDFS: 33  --  13  1  1  1  0  1  1
+1  1  2  1  0  4  0  --  38
+
+T2 game over reached, depth reached: 6
+T1 game over reached, depth reached: 6
+T4 game over reached, depth reached: 7
+T6 game over reached, depth reached: 6
+T3 game over reached, depth reached: 7
+Thread name: T1
+Best heuristics: 17
+Thread name: T2
+Best heuristics: 17
+Thread name: T3
+Best heuristics: 16
+Thread name: T4
+Best heuristics: 12
+Thread name: T6
+Best heuristics: 19
+Best move to play: 6
+The board:
+33  --  13  1  1  1  0  1  1
+1  1  2  1  0  4  0  --  38
+A state
+This was the move: 6
+Is the game over? false
+Is it our turn again? false
+The board:
+33  --  13  1  1  1  0  2  2
+1  1  2  1  0  0  1  --  39
+A state
+This was the move: 1
+Is the game over? false
+Is it our turn again? true
+Board in IDDFS: 33  --  13  1  1  1  1  3  0
+1  1  2  1  0  0  1  --  39
+
+T2 game over reached, depth reached: 5
+T3 game over reached, depth reached: 6
+T4 game over reached, depth reached: 5
+T7 game over reached, depth reached: 5
+T1 game over reached, depth reached: 7
+Thread name: T1
+Best heuristics: 19
+Thread name: T2
+Best heuristics: 23
+Thread name: T3
+Best heuristics: 26
+Thread name: T4
+Best heuristics: 25
+Thread name: T7
+Best heuristics: 28
+Best move to play: 7
+The board:
+33  --  13  1  1  1  1  3  0
+1  1  2  1  0  0  1  --  39
+A state
+This was the move: 7
+Is the game over? false
+Is it our turn again? true
+Board in IDDFS: 33  --  13  1  1  1  1  3  0
+1  1  2  1  0  0  0  --  40
+
+T2 game over reached, depth reached: 4
+T3 game over reached, depth reached: 5
+T1 game over reached, depth reached: 6
+T4 game over reached, depth reached: 4
+Thread name: T1
+Best heuristics: 21
+Thread name: T2
+Best heuristics: 25
+Thread name: T3
+Best heuristics: 28
+Thread name: T4
+Best heuristics: 27
+Best move to play: 3
+The board:
+33  --  13  1  1  1  1  3  0
+1  1  2  1  0  0  0  --  40
+A state
+This was the move: 3
+Is the game over? false
+Is it our turn again? false
+The board:
+33  --  13  1  1  1  0  3  0
+1  1  0  2  0  0  0  --  42
+A state
+This was the move: 2
+Is the game over? false
+Is it our turn again? true
+Board in IDDFS: 33  --  13  1  2  2  1  0  0
+1  1  0  2  0  0  0  --  42
+
+T2 game over reached, depth reached: 3
+T1 game over reached, depth reached: 5
+T4 game over reached, depth reached: 7
+Thread name: T1
+Best heuristics: 27
+Thread name: T2
+Best heuristics: 31
+Thread name: T4
+Best heuristics: 27
+Best move to play: 2
+The board:
+33  --  13  1  2  2  1  0  0
+1  1  0  2  0  0  0  --  42
+A state
+This was the move: 2
+Is the game over? false
+Is it our turn again? false
+The board:
+33  --  13  1  0  2  1  0  0
+1  0  0  2  0  0  0  --  45
+A state
+This was the move: 3
+Is the game over? false
+Is it our turn again? true
+Board in IDDFS: 33  --  13  1  0  3  0  0  0
+1  0  0  2  0  0  0  --  45
+
+T4 game over reached, depth reached: 6
+T1 game over reached, depth reached: 7
+Thread name: T1
+Best heuristics: 40
+Thread name: T4
+Best heuristics: 34
+Best move to play: 1
+The board:
+33  --  13  1  0  3  0  0  0
+1  0  0  2  0  0  0  --  45
+A state
+This was the move: 1
+Is the game over? false
+Is it our turn again? false
+The board:
+33  --  13  0  0  3  0  0  0
+0  0  0  2  0  0  0  --  47
+A state
+This was the move: 4
+Is the game over? false
+Is it our turn again? true
+Board in IDDFS: 33  --  14  1  1  0  0  0  0
+0  0  0  2  0  0  0  --  47
+
+T4 game over reached, depth reached: 5
+Thread name: T4
+Best heuristics: 42
+Best move to play: 4
+The board:
+33  --  14  1  1  0  0  0  0
+0  0  0  2  0  0  0  --  47
+A state
+This was the move: 4
+Is the game over? false
+Is it our turn again? false
+The board:
+33  --  14  1  1  0  0  0  0
+0  0  0  0  1  1  0  --  47
+A state
+This was the move: 5
+Is the game over? false
+Is it our turn again? true
+Board in IDDFS: 33  --  14  2  0  0  0  0  0
+0  0  0  0  1  1  0  --  47
+
+T6 game over reached, depth reached: 9
+T5 game over reached, depth reached: 9
+Thread name: T5
+Best heuristics: 40
+Thread name: T6
+Best heuristics: 39
+Best move to play: 5
+The board:
+33  --  14  2  0  0  0  0  0
+0  0  0  0  1  1  0  --  47
+A state
+This was the move: 5
+Is the game over? false
+Is it our turn again? false
+The board:
+33  --  14  2  0  0  0  0  0
+0  0  0  0  0  2  0  --  47
+A state
+This was the move: 6
+Is the game over? false
+Is it our turn again? false
+The board:
+34  --  15  0  0  0  0  0  0
+0  0  0  0  0  2  0  --  47
+A state
+This was the move: 7
+Is the game over? false
+Is it our turn again? true
+Board in IDDFS: 37  --  0  1  1  1  1  1  1
+0  1  1  1  1  3  1  --  47
+
+T3 game over reached, depth reached: 6
+T2 game over reached, depth reached: 6
+T4 game over reached, depth reached: 6
+T5 game over reached, depth reached: 6
+T6 game over reached, depth reached: 6
+T7 game over reached, depth reached: 6
+Thread name: T2
+Best heuristics: 37
+Thread name: T3
+Best heuristics: 37
+Thread name: T4
+Best heuristics: 40
+Thread name: T5
+Best heuristics: 36
+Thread name: T6
+Best heuristics: 36
+Thread name: T7
+Best heuristics: 40
+Best move to play: 4
+The board:
+37  --  0  1  1  1  1  1  1
+0  1  1  1  1  3  1  --  47
+A state
+This was the move: 4
+Is the game over? false
+Is it our turn again? false
+The board:
+37  --  0  1  1  1  1  1  1
+0  1  1  0  2  3  1  --  47
+A state
+This was the move: 1
+Is the game over? false
+Is it our turn again? true
+Board in IDDFS: 37  --  0  1  1  1  1  2  0
+0  1  1  0  2  3  1  --  47
+
+T2 game over reached, depth reached: 6
+T3 game over reached, depth reached: 6
+T5 game over reached, depth reached: 6
+T6 game over reached, depth reached: 6
+T7 game over reached, depth reached: 7
+Thread name: T2
+Best heuristics: 37
+Thread name: T3
+Best heuristics: 42
+Thread name: T5
+Best heuristics: 34
+Thread name: T6
+Best heuristics: 36
+Thread name: T7
+Best heuristics: 45
+Best move to play: 7
+The board:
+37  --  0  1  1  1  1  2  0
+0  1  1  0  2  3  1  --  47
+A state
+This was the move: 7
+Is the game over? false
+Is it our turn again? true
+Board in IDDFS: 37  --  0  1  1  1  1  2  0
+0  1  1  0  2  3  0  --  48
+
+T2 game over reached, depth reached: 6
+T3 game over reached, depth reached: 8
+T6 game over reached, depth reached: 7
+T5 game over reached, depth reached: 6
+Thread name: T2
+Best heuristics: 37
+Thread name: T3
+Best heuristics: 42
+Thread name: T5
+Best heuristics: 39
+Thread name: T6
+Best heuristics: 45
+Best move to play: 6
+The board:
+37  --  0  1  1  1  1  2  0
+0  1  1  0  2  3  0  --  48
+A state
+This was the move: 6
+Is the game over? false
+Is it our turn again? false
+The board:
+37  --  0  1  1  1  1  2  1
+0  1  1  0  2  0  1  --  49
+A state
+This was the move: 1
+Is the game over? false
+Is it our turn again? true
+Board in IDDFS: 37  --  0  1  1  1  1  3  0
+0  1  1  0  2  0  1  --  49
+
+T2 game over reached, depth reached: 5
+T3 game over reached, depth reached: 6
+T5 game over reached, depth reached: 5
+T7 game over reached, depth reached: 7
+Thread name: T2
+Best heuristics: 39
+Thread name: T3
+Best heuristics: 45
+Thread name: T5
+Best heuristics: 39
+Thread name: T7
+Best heuristics: 45
+Best move to play: 3
+The board:
+37  --  0  1  1  1  1  3  0
+0  1  1  0  2  0  1  --  49
+A state
+This was the move: 3
+Is the game over? false
+Is it our turn again? false
+The board:
+37  --  0  1  1  0  1  3  0
+0  1  0  0  2  0  1  --  51
+A state
+This was the move: 2
+Is the game over? false
+Is it our turn again? true
+Board in IDDFS: 37  --  0  1  2  1  2  0  0
+0  1  0  0  2  0  1  --  51
+
+T2 game over reached, depth reached: 5
+T5 game over reached, depth reached: 4
+T7 game over reached, depth reached: 7
+Thread name: T2
+Best heuristics: 54
+Thread name: T5
+Best heuristics: 45
+Thread name: T7
+Best heuristics: 54
+Best move to play: 2
+The board:
+37  --  0  1  2  1  2  0  0
+0  1  0  0  2  0  1  --  51
+A state
+This was the move: 2
+Is the game over? false
+Is it our turn again? false
+The board:
+37  --  0  1  0  1  2  0  0
+0  0  0  0  2  0  1  --  54
+A state
+This was the move: 3
+Is the game over? false
+Is it our turn again? true
+Board in IDDFS: 37  --  0  1  1  2  0  0  0
+0  0  0  0  2  0  1  --  54
+
+T5 game over reached, depth reached: 3
+T7 game over reached, depth reached: 5
+Thread name: T5
+Best heuristics: 54
+Thread name: T7
+Best heuristics: 57
+Best move to play: 7
+The board:
+37  --  0  1  1  2  0  0  0
+0  0  0  0  2  0  1  --  54
+A state
+This was the move: 7
+Is the game over? false
+Is it our turn again? true
+Board in IDDFS: 37  --  0  1  1  2  0  0  0
+0  0  0  0  2  0  0  --  55
+
+T5 game over reached, depth reached: 4
+Thread name: T5
+Best heuristics: 57
+Best move to play: 5
+The board:
+37  --  0  1  1  2  0  0  0
+0  0  0  0  2  0  0  --  55
+A state
+This was the move: 5
+Is the game over? false
+Is it our turn again? false
+The board:
+37  --  0  1  1  2  0  0  0
+0  0  0  0  0  1  1  --  55
+A state
+This was the move: 4
+Is the game over? false
+Is it our turn again? true
+Board in IDDFS: 37  --  0  2  2  0  0  0  0
+0  0  0  0  0  1  1  --  55
+
+T6 game over reached, depth reached: 2
+T7 game over reached, depth reached: 3
+Thread name: T6
+Best heuristics: 51
+Thread name: T7
+Best heuristics: 57
+Best move to play: 7
+The board:
+37  --  0  2  2  0  0  0  0
+0  0  0  0  0  1  1  --  55
+A state
+This was the move: 7
+Is the game over? false
+Is it our turn again? true
+Board in IDDFS: 37  --  0  2  2  0  0  0  0
+0  0  0  0  0  1  0  --  56
+
+T6 game over reached, depth reached: 2
+Thread name: T6
+Best heuristics: 54
+Best move to play: 6
+The board:
+37  --  0  2  2  0  0  0  0
+0  0  0  0  0  1  0  --  56
+A state
+This was the move: 6
+Is the game over? false
+Is it our turn again? false
+The board:
+37  --  0  2  2  0  0  0  0
+0  0  0  0  0  0  1  --  56
+A state
+This was the move: 5
+Is the game over? false
+Is it our turn again? true
+Board in IDDFS: 37  --  1  3  0  0  0  0  0
+0  0  0  0  0  0  1  --  56
+
+T7 game over reached, depth reached: 1
+Thread name: T7
+Best heuristics: 48
+Best move to play: 7
+The board:
+37  --  1  3  0  0  0  0  0
+0  0  0  0  0  0  1  --  56
+A state
+This was the move: 7
+Is the game over? true
+Is it our turn again? false
+The board:
+41  --  0  0  0  0  0  0  0
+0  0  0  0  0  0  0  --  57
+An end

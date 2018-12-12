@@ -1,0 +1,268 @@
+Agent started
+Time to search: 500
+A start
+Time elapsed, depth reached: 9
+Starting player? true
+A state
+This was the move: 2
+Is the game over? false
+Is it our turn again? false
+The board:
+0  --  7  7  7  7  7  7  8
+7  0  8  8  8  8  8  --  1
+A state
+This was the move: 1
+Is the game over? false
+Is it our turn again? true
+Time elapsed, depth reached: 9
+The board:
+1  --  8  8  8  8  8  8  0
+8  0  8  8  8  8  8  --  1
+A state
+This was the move: 1
+Is the game over? false
+Is it our turn again? false
+The board:
+1  --  8  8  8  8  8  8  1
+0  1  9  9  9  9  9  --  2
+A state
+This was the move: 1
+Is the game over? false
+Is it our turn again? true
+Time elapsed, depth reached: 9
+The board:
+1  --  8  8  8  8  8  9  0
+0  1  9  9  9  9  9  --  2
+A state
+This was the move: 3
+Is the game over? false
+Is it our turn again? false
+The board:
+1  --  8  8  8  9  9  10  1
+0  1  0  10  10  10  10  --  3
+A state
+This was the move: 1
+Is the game over? false
+Is it our turn again? true
+Time elapsed, depth reached: 10
+The board:
+1  --  8  8  8  9  9  11  0
+0  1  0  10  10  10  10  --  3
+A state
+This was the move: 6
+Is the game over? false
+Is it our turn again? false
+The board:
+1  --  0  9  9  10  10  12  1
+0  1  0  10  10  0  11  --  14
+A state
+This was the move: 1
+Is the game over? false
+Is it our turn again? true
+Time elapsed, depth reached: 10
+The board:
+1  --  0  9  9  10  10  13  0
+0  1  0  10  10  0  11  --  14
+A state
+This was the move: 7
+Is the game over? false
+Is it our turn again? false
+The board:
+1  --  1  10  0  11  11  14  1
+1  2  0  10  10  0  0  --  26
+A state
+This was the move: 1
+Is the game over? false
+Is it our turn again? true
+Time elapsed, depth reached: 10
+The board:
+1  --  1  10  0  11  11  15  0
+1  2  0  10  10  0  0  --  26
+A state
+This was the move: 5
+Is the game over? false
+Is it our turn again? false
+The board:
+1  --  2  11  1  12  12  16  1
+1  2  0  10  0  1  1  --  27
+A state
+This was the move: 1
+Is the game over? false
+Is it our turn again? true
+Time elapsed, depth reached: 10
+The board:
+1  --  2  11  1  12  12  17  0
+1  2  0  10  0  1  1  --  27
+A state
+This was the move: 7
+Is the game over? false
+Is it our turn again? true
+Time elapsed, depth reached: 11
+The board:
+1  --  2  11  1  12  12  17  0
+1  2  0  10  0  1  0  --  28
+A state
+This was the move: 1
+Is the game over? false
+Is it our turn again? false
+The board:
+1  --  2  11  1  12  12  17  0
+0  3  0  10  0  1  0  --  28
+A state
+This was the move: 5
+Is the game over? false
+Is it our turn again? true
+Time elapsed, depth reached: 11
+The board:
+1  --  2  12  0  12  12  17  0
+0  3  0  10  0  1  0  --  28
+A state
+This was the move: 2
+Is the game over? false
+Is it our turn again? false
+The board:
+1  --  2  12  0  12  0  17  0
+0  0  1  11  0  1  0  --  41
+A state
+This was the move: 7
+Is the game over? false
+Is it our turn again? true
+Time elapsed, depth reached: 11
+The board:
+2  --  0  12  0  12  0  17  0
+1  0  1  11  0  1  0  --  41
+A state
+This was the move: 1
+Is the game over? false
+Is it our turn again? false
+The board:
+2  --  0  0  0  12  0  17  0
+0  0  1  11  0  1  0  --  54
+A state
+This was the move: 4
+Is the game over? false
+Is it our turn again? true
+Time elapsed, depth reached: 10
+The board:
+5  --  1  1  1  0  0  17  0
+1  1  2  12  1  2  0  --  54
+A state
+This was the move: 6
+Is the game over? false
+Is it our turn again? true
+Time elapsed, depth reached: 10
+The board:
+5  --  1  1  1  0  0  17  0
+1  1  2  12  1  0  1  --  55
+A state
+This was the move: 5
+Is the game over? false
+Is it our turn again? false
+The board:
+5  --  1  1  1  0  0  0  0
+1  1  2  12  0  0  1  --  73
+A state
+This was the move: 5
+Is the game over? false
+Is it our turn again? true
+Time elapsed, depth reached: 18
+The board:
+5  --  1  2  0  0  0  0  0
+1  1  2  12  0  0  1  --  73
+A state
+This was the move: 4
+Is the game over? false
+Is it our turn again? false
+The board:
+5  --  2  3  1  1  1  1  1
+2  1  2  0  1  1  2  --  74
+A state
+This was the move: 1
+Is the game over? false
+Is it our turn again? true
+Time elapsed, depth reached: 13
+The board:
+5  --  2  3  1  1  1  2  0
+2  1  2  0  1  1  2  --  74
+A state
+This was the move: 1
+Is the game over? false
+Is it our turn again? false
+The board:
+5  --  2  3  1  1  1  2  0
+0  2  3  0  1  1  2  --  74
+A state
+This was the move: 2
+Is the game over? false
+Is it our turn again? true
+Time elapsed, depth reached: 16
+The board:
+5  --  2  3  1  2  2  0  0
+0  2  3  0  1  1  2  --  74
+A state
+This was the move: 2
+Is the game over? false
+Is it our turn again? false
+The board:
+5  --  2  3  1  0  2  0  0
+0  0  4  0  1  1  2  --  77
+A state
+This was the move: 3
+Is the game over? false
+Is it our turn again? true
+Time elapsed, depth reached: 20
+The board:
+5  --  2  3  2  1  0  0  0
+0  0  4  0  1  1  2  --  77
+A state
+This was the move: 6
+Is the game over? false
+Is it our turn again? false
+The board:
+5  --  2  3  2  1  0  0  0
+0  0  4  0  1  0  3  --  77
+A state
+This was the move: 4
+Is the game over? false
+Is it our turn again? true
+Time elapsed, depth reached: 22
+The board:
+5  --  2  3  3  0  0  0  0
+0  0  4  0  1  0  3  --  77
+A state
+This was the move: 3
+Is the game over? false
+Is it our turn again? false
+The board:
+5  --  2  3  3  0  0  0  0
+0  0  0  1  2  1  4  --  77
+A state
+This was the move: 5
+Is the game over? false
+Is it our turn again? false
+The board:
+6  --  3  4  0  0  0  0  0
+0  0  0  1  2  1  4  --  77
+A state
+This was the move: 6
+Is the game over? false
+Is it our turn again? true
+Game over reached, depth reached: 28
+The board:
+7  --  4  0  0  0  0  0  0
+1  1  0  1  2  1  4  --  77
+A state
+This was the move: 1
+Is the game over? false
+Is it our turn again? false
+The board:
+7  --  4  0  0  0  0  0  0
+0  2  0  1  2  1  4  --  77
+A state
+This was the move: 7
+Is the game over? true
+Is it our turn again? false
+The board:
+8  --  0  0  0  0  0  0  0
+0  0  0  0  0  0  0  --  90
+An end
